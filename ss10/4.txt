@@ -1,0 +1,48 @@
+# Bài 4 : Thiết kế Prompt tối ưu cho AI Assistant
+## 1. Thiết kế Kiến trúc
+# [Bối cảnh] Gia sư AI chuyên môn hệ thống nông nghiệp thông minh
+Bạn là một gia sư công nghệ thông tin tận tâm, chuyên hỗ trợ sinh viên năm 1. Tôi hiện đang gặp khó khăn trong việc hiểu về "Mô hình IPO (Input - Process - Output) trong trang trại thông minh" và cần được giải thích một cách trực quan, gần gũi nhất.
+
+## [Nội dung] Giải thích khái niệm Mô hình IPO cho trang trại thông minh
+Hãy phân tích và làm rõ mô hình IPO áp dụng vào thực tế vận hành của một trang trại thông minh (ví dụ: hệ thống tưới nước tự động hoặc nhà kính thông minh) theo các khía cạnh cơ bản.
+
+## [Yêu cầu] Các nhiệm vụ cần thực hiện
+- [x] Định nghĩa ngắn gọn Mô hình IPO (Input - Process - Output) là gì.
+- [x] Lấy ví dụ thực tế về một thiết bị trong trang trại thông minh để minh họa rõ 3 thành phần trên.
+- [x] Trình bày luồng dữ liệu hoạt động của hệ thống từ lúc nhận dữ liệu đến khi ra quyết định điều khiển.
+- [ ] Giải thích bằng ngôn ngữ đời thường, tuyệt đối tránh dùng các thuật ngữ chuyên ngành phức tạp hoặc code lập trình dài dòng.
+## 2.Sản phẩm
+# Giải thích Mô hình IPO trong Trang trại Thông minh dành cho Sinh viên năm 1
+
+Chào bạn! Đừng lo lắng, mô hình **IPO** thực ra rất gần gũi và dễ hiểu nếu chúng ta ví nó như cách con người suy nghĩ và hành động. Trong lập trình và hệ thống, IPO là viết tắt của ba bước: **Input (Đầu vào) - Process (Xử lý) - Output (Đầu ra)**.
+
+---
+
+## 1. Phân tích 3 thành phần qua hệ thống "Tưới cây tự động"
+
+Hãy tưởng tượng trang trại thông minh của bạn có một hệ thống tự động tưới lan khi đất khô:
+
+* **Input (Đầu vào - Giống như "Giác quan"):** 
+  * Là dữ liệu thô được thu nhận từ thế giới thực. 
+  * *Ví dụ:* Cảm biến đo độ ẩm đất báo cáo độ ẩm hiện tại là 15% (đất đang khô).
+
+* **Process (Xử lý - Giống như "Bộ não"):** 
+  * Là nơi bộ điều khiển trung tâm (như bo mạch Raspberry Pi hoặc vi điều khiển) suy nghĩ và ra quyết định dựa trên thông tin đầu vào.
+  * *Ví dụ:* Bộ não so sánh: *"Nếu độ ẩm < 20%, thì phải bật máy bơm ngay!"*.
+
+* **Output (Đầu ra - Giống như "Hành động"):** 
+  * Là kết quả cuối cùng tác động trở lại môi trường.
+  * *Ví dụ:* Máy bơm nước bật lên, nước phun ra tưới cho các giò lan.
+
+---
+
+## 2. Luồng dữ liệu hoạt động tổng quát
+
+```text
+[Cảm biến đo đạc (Input)] 
+        │
+        ▼ (Gửi dữ liệu qua dây dẫn)
+[Bộ điều khiển phân tích (Process)] 
+        │
+        ▼ (Ra lệnh kích hoạt)
+[Máy bơm hoạt động (Output)]

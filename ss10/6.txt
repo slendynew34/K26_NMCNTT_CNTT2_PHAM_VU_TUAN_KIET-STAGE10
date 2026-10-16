@@ -1,0 +1,41 @@
+# Bài 6 : Sự cố tài liệu dự án trên GitHub
+## Phần 1. Phân tích
+### 1. Chỉ ra ít nhất 2 sai lầm trong tư duy của Nam
+
+-   **Sai lầm 1: Nhầm lẫn giữa tài liệu văn phòng (Office Document) và tài liệu mã nguồn (Source Control).** Nam xem GitHub như một ổ cứng đám mây thông thường (giống Google Drive hay OneDrive) để lưu các định dạng nhị phân (.docx). Trong khi đó, GitHub là hệ thống quản lý mã nguồn (VCS) dựa trên Git, vốn được thiết kế tối ưu cho các văn bản thô (Plain Text) để theo dõi từng dòng thay đổi (Git Diff), kiểm soát phiên bản và cộng tác nhóm.
+    
+-   **Sai lầm 2: Bỏ qua khả năng tương thích hiển thị và cơ chế quản lý xung đột (Merge Conflict).** File `.docx` thực chất là một gói nén chứa rất nhiều tệp XML cấu trúc phức tạp bên trong. Khi hai người cùng sửa hoặc hệ thống lưu trữ lịch sử thay đổi qua các dòng nhị phân này, Git không thể đọc hiểu từng ký tự riêng lẻ để ghép nối (merge) thông minh, dẫn đến việc báo lỗi xung đột toàn bộ file mỗi khi có một thay đổi nhỏ (như một dấu phẩy). Trình duyệt của GitHub cũng không thể tự động render file Word trực tiếp mà không cần công cụ bên thứ ba.
+    
+
+### 2. Tại sao Markdown lại an toàn và nhẹ hơn?
+
+-   **Bản chất Plain Text:** Markdown (`.md`) hoàn toàn là văn bản thô thuần túy, dung lượng cực kỳ nhẹ (chỉ vài KB cho một tài liệu dài).
+    
+-   **Khả năng chống hư hại file (Bẫy dữ liệu):**
+    
+    -   _Với file `.docx`:_ Do được nén từ cấu trúc XML phức tạp, nếu bị lỗi mạng làm mất/hỏng dù chỉ **1 byte** dữ liệu, cấu trúc gói nén sẽ bị phá vỡ và Microsoft Word sẽ báo lỗi _"The file is corrupt and cannot be opened"_, làm mất toàn bộ nội dung.
+        
+    -   _Với file Markdown (`.md`):_ Vì là văn bản thô, nếu mất 1 byte hoặc một vài ký tự, người dùng vẫn có thể mở file bằng bất kỳ trình soạn thảo nào (Notepad, VS Code), nội dung còn lại hoàn toàn nguyên vẹn và không bị hỏng cấu trúc toàn cục.
+        
+-   **Hỗ trợ Git Diff xuất sắc:** Khi làm việc nhóm trên GitHub, Git có thể dễ dàng so sánh từng dòng code/text thay đổi (thêm màu xanh, xóa màu đỏ) giữa các phiên bản commit, giúp việc ghép nối (merge) code trở nên mượt mà, minh bạch.
+## Phần 2. Hoàn thiện
+# 🌿 Dự án: GreenTech - Hệ thống Nông nghiệp Thông minh
+
+> *Giải pháp IoT ứng dụng công nghệ hiện đại nhằm tối ưu hóa quy trình canh tác, tiết kiệm tài nguyên và nâng cao năng suất cho các trang trại Việt Nam.*
+
+---
+
+## 1. Giới thiệu tổng quan
+**GreenTech** là hệ thống tự động hóa nông nghiệp tích hợp các cảm biến môi trường (nhiệt độ, độ ẩm đất, ánh sáng) và bộ vi điều khiển trung tâm (SoC). Hệ thống giúp người nông dân theo dõi trực quan các thông số của vườn cây và tự động điều khiển hệ thống tưới tiêu, quạt thông gió từ xa.
+
+## 2. Các tính năng cốt lõi
+- **Giám sát thời gian thực:** Cập nhật liên tục các chỉ số môi trường 24/7.
+- **Tự động hóa theo mô hình IPO:** 
+  - *Input:* Dữ liệu thô từ cảm biến độ ẩm đất.
+  - *Process:* Vi điều khiển phân tích và so sánh với ngưỡng cài đặt.
+  - *Output:* Tự động kích hoạt máy bơm nước khi đất khô.
+- **Tiết kiệm tài nguyên:** Giảm thiểu lượng nước tưới lãng phí và tối ưu hóa điện năng tiêu thụ.
+
+## 3. Công nghệ sử dụng
+* **Phần cứng:** Raspberry Pi, Cảm biến độ ẩm đất Capacitive, Cảm biến nhiệt độ DHT22.
+* **Phần mềm:** Python, Git & GitHub, Markdown tài liệu hóa.

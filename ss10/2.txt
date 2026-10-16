@@ -1,0 +1,100 @@
+# BÀI TẬP 2: Chuẩn hóa tài liệu cài đặt hệ thống
+
+## 1. Báo cáo phân tích (I/O)
+
+-   **Input (Văn bản thô):**
+    
+    -   Các yêu cầu về hướng dẫn cài đặt hệ thống tưới tự động cho trang trại Lan.
+        
+    -   Thông tin về cấu hình đoạn code Python điều khiển máy bơm, thông số kỹ thuật so sánh giữa cảm biến độ ẩm đất cũ (Analog) và mới (Digital/Capacitive).
+        
+    -   Danh sách các công việc kiểm tra thiết bị thủ công và các ký tự đặc biệt cần escape trong Markdown.
+        
+-   **Output (Giao diện render chuyên nghiệp):**
+    
+    -   File tài liệu định dạng Markdown (`README.md`) hoàn chỉnh.
+        
+    -   Sử dụng thành thạo **Inline Code** (`pip install`, tên biến), **Code Block** (Python có Syntax Highlighting), **Table** so sánh cảm biến rõ ràng, cùng hệ thống **Task List** tương tác để kiểm tra thiết bị.
+        
+
+## 2. Source code (`README.md`)
+
+Bạn có thể sao chép đoạn mã dưới đây để tạo file `README.md` hoàn chỉnh cho bài nộp của mình:
+# Hướng dẫn cài đặt hệ thống cảm biến độ ẩm cho trang trại Lan
+
+Tài liệu này hướng dẫn chi tiết cách thiết lập phần mềm, cấu hình cảm biến và vận hành hệ thống tưới nước tự động cho trang trại phong lan.
+
+## 1. Chuẩn bị môi trường & Thư viện
+
+Trước tiên, mở Terminal và chạy lệnh sau để cài đặt các thư viện điều khiển phần cứng cần thiết:
+
+`pip install RPi.GPIO Adafruit-DHT`
+
+## 2. Mã nguồn điều khiển máy bơm
+
+Dưới đây là đoạn code Python sử dụng cảm biến độ ẩm để tự động bật/tắt máy bơm (`pump_status`):
+# Hướng dẫn cài đặt hệ thống cảm biến độ ẩm cho trang trại Lan
+
+Tài liệu này hướng dẫn chi tiết cách thiết lập phần mềm, cấu hình cảm biến và vận hành hệ thống tưới nước tự động cho trang trại phong lan.
+
+## 1. Chuẩn bị môi trường & Thư viện
+
+Trước tiên, mở Terminal và chạy lệnh sau để cài đặt các thư viện điều khiển phần cứng cần thiết:
+
+`pip install RPi.GPIO Adafruit-DHT`
+
+## 2. Mã nguồn điều khiển máy bơm
+
+Dưới đây là đoạn code Python sử dụng cảm biến độ ẩm để tự động bật/tắt máy bơm (`pump_status`):
+
+```python
+import RPi.GPIO as GPIO
+import time
+
+# Khai báo chân GPIO
+SENSOR_PIN = 4
+PUMP_PIN = 17
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SENSOR_PIN, GPIO.IN)
+GPIO.setup(PUMP_PIN, GPIO.OUT)
+
+def control_pump():
+    try:
+        while True:
+            # Đọc giá trị từ cảm biến độ ẩm
+            moisture_level = GPIO.input(SENSOR_PIN)
+            pump_status = False
+            
+            if moisture_level == 0: # Đất khô
+                GPIO.output(PUMP_PIN, GPIO.HIGH)
+                pump_status = True
+                print("Độ ẩm thấp: Đã BẬT máy bơm nước.")
+            else: # Đất đủ ẩm
+                GPIO.output(PUMP_PIN, GPIO.LOW)
+                print("Độ ẩm ổn định: Đã TẮT máy bơm.")
+                
+            time.sleep(5)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+
+if __name__ == "__main__":
+    control_pump()
+ ```
+ ## 3. So sánh loại cảm biến (Cũ vs Mới)
+
+|**Tiêu chí**|**Cảm biến loại cũ (Analog)**|**Cảm biến loại mới (Capacitive)**|
+|-|-|-|
+|**Độ bền**|Thấp (Dễ bị ăn mòn điện cực theo thời gian)|Cao (Lớp phủ chống ăn mòn tốt hơn)|
+|**Độ chính xác**|Trung bình (Bị nhiễu bởi độ dẫn điện của đất)|Cao (Đo điện dung, ít bị ảnh hưởng bởi ion)|
+|**Chi phí**|Rẻ|Nhỉnh hơn|
+
+## 4. Danh sách kiểm tra thiết bị (Task List)
+
+-   [x] Kiểm tra nguồn điện và dây dẫn kết nối Raspberry Pi
+    
+-   [x] Vệ sinh bề mặt cảm biến độ ẩm trước khi lắp đặt
+    
+-   [ ] Test thử nghiệm phản hồi của máy bơm trong 10 phút
+    
+-   [ ] Cấu hình chạy tự động khởi động cùng hệ thống (`systemd`)

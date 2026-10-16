@@ -1,0 +1,26 @@
+# Bài 3 : Giảm chi phí vận hành Chatbot AI
+## Phần 1. Phân tích bài toán: Cơ chế Token và hiệu suất xử lý của AI
+
+-   **Khái niệm Token là gì?** Token không phải là một từ hoàn chỉnh, mà là một đoạn ký tự nhỏ (có thể là một từ, một phần của từ, hoặc một ký tự đặc biệt) mà mô hình ngôn ngữ lớn (LLM) dùng để đọc và tạo văn bản. Trung bình, 1 token tương đương khoảng 4 ký tự tiếng Anh (hoặc nhiều hơn đối với tiếng Việt do cấu trúc dấu và từ ghép).
+    
+-   **Tại sao Markdown giúp AI xử lý nhanh và tiết kiệm hơn HTML?**
+    
+    -   **Ít ký tự rác hơn:** HTML sử dụng rất nhiều thẻ đóng/mở dài dòng (như `<strong>...</strong>`, `<ul><li>...</li></ul>`), trong khi Markdown chỉ dùng các ký tự cú pháp tối giản (như `**` cho in đậm, `-` cho danh sách).
+        
+    -   **Tối ưu hóa số lượng Token:** Vì HTML chứa lượng thẻ tag khổng lồ, tổng số token được gửi vào API của AI sẽ tăng lên đáng kể. Ngược lại, Markdown giữ nguyên bản văn bản thô với lượng token cực kỳ nhỏ gọn.
+        
+    -   **Tốc độ xử lý và chi phí:** Các dịch vụ AI tính phí dựa trên số lượng token (Input/Output). Dùng Markdown giúp giảm token tiêu thụ, trực tiếp làm giảm chi phí vận hành hệ thống và rút ngắn thời gian phản hồi (giảm độ trễ) cho người nông dân khi tương tác với chatbot.
+   ## Phần 2. So sánh Markdown và HTML & Giải pháp cho hệ thống "GreenTech"
+
+### 1. Bảng so sánh chi tiết
+|**Tiêu chí**|**Markdown**|**HTML**
+|-|-|-|
+|**Cú pháp & Độ cồng kềnh**|Gọn nhẹ, tối giản (Sử dụng ký tự tự nhiên như `#`, `*`, `-`).|Rườm rà, nhiều thẻ đóng mở lồng nhau (`<div>`, `<span>`, `<ul>`).|
+|**Số lượng Token tiêu thụ**|**Thấp:** Tiết kiệm băng thông và giảm chi phí gọi API AI.|**Cao:** Lãng phí token cho các thẻ định dạng cấu trúc.|
+|**Tính dễ đọc (Human-readable)**|**Rất cao:** Người dùng có thể đọc trực tiếp mã nguồn văn bản một cách dễ dàng ngay cả khi chưa render.|**Thấp:** Khó đọc trực tiếp bằng mắt thường do bị nhiễu bởi các thẻ HTML.|
+|**Mức độ hỗ trợ bởi LLM**|Các mô hình AI hiện đại (GPT, Gemini, Claude) được train trực tiếp và hiểu sâu sắc định dạng Markdown.|AI vẫn hiểu được nhưng tốn tài nguyên xử lý các ký tự cú pháp thừa.|
+### 2. Giải pháp tối ưu và Lập luận cho hệ thống "GreenTech"
+-   **Lựa chọn tối ưu:** Sử dụng **Markdown** làm định dạng cốt lõi cho toàn bộ luồng truyền tải dữ liệu giữa hệ thống "Chuyên gia nông nghiệp AI" và người dùng.
+    -   **Lập luận:**
+           1.  **Tối ưu chi phí:** Đối với một hệ thống nông nghiệp thông minh phục vụ số lượng lớn người nông dân, việc cắt giảm 30% - 50% số lượng token trên mỗi câu trả lời nhờ Markdown sẽ tiết kiệm một khoản chi phí vận hành API khổng lồ về lâu dài.        
+           2.  **Trải nghiệm người dùng:** Giao diện văn bản thô của Markdown rất thân thiện (Human-readable). Trong trường hợp mạng internet ở vùng nông thôn gặp sự cố hoặc hiển thị dạng văn bản thuần túy, người nông dân vẫn có thể đọc hiểu nội dung dễ dàng mà không bị che khuất bởi các đoạn mã thẻ rườm rà như HTML.

@@ -1,0 +1,25 @@
+# BÀI TẬP 1: Chuẩn hóa tài liệu Markdown cho dự án
+## PHẦN 1: PHÂN TÍCH
+### 1. Chỉ ra ít nhất 3 lỗi cú pháp trong đoạn mã trên
+-   **Lỗi 1 (Phân cấp Heading không hợp lý):** Đoạn mã nhảy cóc từ tiêu đề cấp 1 (`# Lợi ích của rau sạch`) xuống thẳng tiêu đề cấp 3 (`### Danh sách các loại rau`), bỏ qua cấp 2 (`##`).
+    
+-   **Lỗi 2 (Cú pháp chèn ảnh bị sai):** Cú pháp`[Logo Dự án] ([https://greentech.vn/logo.png](https://greentech.vn/logo.png))`
+bị thừa khoảng trắng giữa cặp ngoặc vuông `[ ]` và cặp ngoặc tròn `( )`, đồng thời thiếu dấu chấm than (`!`) ở đầu để hệ thống nhận diện đây là hình ảnh thay vì một đường dẫn liên kết văn bản bình thường.
+    
+-   **Lỗi 3 (Sai cú pháp in đậm - Bold):** Dòng `*Rất quan trọng*` chỉ sử dụng một dấu sao (`*`) ở mỗi đầu, khiến hệ thống hiểu đây là định dạng in nghiêng (Italic) thay vì in đậm (Bold) yêu cầu dùng hai dấu sao (`**`). 
+###  2. Giải thích tại sao kết quả render không như ý:
+
+-   **Về tiêu đề:** Việc nhảy cấp Heading làm cấu trúc tài liệu bị đứt gãy logic, khiến trình duyệt/công cụ render hiển thị kích thước chữ không theo thứ tự tự nhiên (không đồng bộ cấp bậc thông tin).
+    
+-   **Về hình ảnh:** Do thiếu dấu chấm than `!` ở đầu và bị tách rời bởi khoảng trắng, tệp ảnh Logo sẽ không thể hiển thị dưới dạng hình họa trực quan mà chỉ hiện lên thành một dòng chữ link màu xanh thông thường.
+    
+-   **Về văn bản:** Do dùng sai số lượng dấu sao, đoạn chữ thay vì hiển thị đậm để nhấn mạnh mức độ quan trọng lại chỉ hiển thị ở dạng chữ nghiêng.
+## PHẦN 2: HOÀN THIỆN
+### **Đoạn mã Markdown chuẩn hóa:**
+# Lợi ích của rau sạch
+
+## Danh sách các loại rau
+
+![Logo Dự án](https://greentech.vn/logo.png)
+
+**Rất quan trọng**

@@ -1,0 +1,98 @@
+# Bài 5 : Xây dựng bộ tài liệu kỹ thuật cho dự án Smart Farm
+## Phần 1: Phân tích
+### 1. Xác định Input / Output của hệ thống Smart Farm
+
+-   **Input (Đầu vào):**
+    
+    -   Dữ liệu từ cảm biến môi trường (nhiệt độ, độ ẩm đất, độ ẩm không khí, cường độ ánh sáng).
+        
+    -   Lệnh thủ công hoặc cấu hình ngưỡng tự động từ người dùng qua bảng điều khiển / ứng dụng.
+        
+-   **Output (Đầu ra):**
+    
+    -   Tín hiệu điều khiển phần cứng: Bật/tắt máy bơm nước, quạt thông gió, đèn chiếu sáng nhà kính.
+        
+    -   Trạng thái hiển thị trực quan trên màn hình LCD/Giao diện quản lý và lưu trữ nhật ký (Log) vào bộ nhớ.
+        
+
+### 2. Sơ đồ phối hợp phần cứng (Hardware Architecture)
+[Cảm biến môi trường (DHT22 / Capacitive)] 
+                 │ (Dữ liệu thô)
+                 ▼
+[Vi điều khiển / SoC trung tâm (Raspberry Pi / ESP32)] 
+                 │ (Xử lý & Ra lệnh)
+                 ▼
+[Cơ cấu chấp hành (Máy bơm nước / Đèn / Quạt)]
+## Phần 2. Triển khai
+# 🚀 Smart-Farm: Hệ thống Quản lý và Tự động hóa Trang trại Lan
+
+> *Hệ thống thông minh ứng dụng IoT và vi điều khiển giúp tối ưu hóa quy trình chăm sóc hoa lan, tiết kiệm tài nguyên và nâng cao năng suất cây trồng.*
+
+---
+
+### 1. Sơ đồ hệ thống & Mô tả phần cứng (SoC)
+
+Hệ thống sử dụng vi điều khiển trung tâm (SoC - System on a Chip) tích hợp vi xử lý, bộ nhớ và các giao tiếp ngoại vi trên một vi mạch duy nhất để xử lý toàn bộ dữ liệu từ cảm biến.
+
+![Sơ đồ kiến trúc phần cứng hệ thống Smart Farm](https://rikkeiedu-storage.s3.ap-southeast-2.amazonaws.com/uploads/editor-images/1787648283613_687ec2e7-229c-4942-a347-080fae59560a.webp)
+
+> [!NOTE]
+> **Chu kỳ xử lý lệnh (Fetch–Decode–Execute) tại CPU khi nhận lệnh tưới Lan:**
+> 1. **Fetch (Lấy lệnh):** CPU truy xuất chỉ thị từ bộ nhớ RAM/ROM chứa đoạn mã kiểm tra độ ẩm đất.
+> 2. **Decode (Giải mã):** Bộ điều khiển giải mã lệnh để xác định nhiệm vụ cần thực hiện (ví dụ: kích hoạt chân GPIO điều khiển máy bơm).
+> 3. **Execute (Thực thi):** Gửi dòng điện kích hoạt rơ-le, bật máy bơm nước tưới cho giò lan.
+
+---
+
+### 2. Hướng dẫn cài đặt & Cấu hình môi trường
+
+Mở Terminal trên thiết bị điều khiển và chạy các lệnh sau để thiết lập môi trường phần mềm:
+
+```
+# Cập nhật hệ thống và cài đặt Python cùng thư viện GPIO
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip python3-rpi.gpio -y
+
+# Clone mã nguồn dự án Smart Farm từ kho lưu trữ
+git clone [https://github.com/username/smart-farm-iot.git](https://github.com/username/smart-farm-iot.git)
+cd smart-farm-iot
+
+# Cài đặt các gói phụ thuộc Python
+pip install -r requirements.txt
+```
+###  3. Quy trình chuyển hóa dữ liệu (Mô hình DIKW)
+
+Quy trình hệ thống xử lý thông tin từ cảm biến thô đến hành động thực tế tại trang trại:
+
+-   **Data (Dữ liệu):** Các con số thô từ cảm biến (Ví dụ: `Nhiệt độ = 38°C`, `Độ ẩm = 40%`).
+    
+-   **Information (Thông tin):** Dữ liệu được gán ngữ cảnh (Ví dụ: _"Nhiệt độ nhà kính đang ở mức cao, vượt ngưỡng cho phép 35°C"_).
+    
+-   **Knowledge (Tri thức):** Hiểu được nguyên nhân và quy luật (Ví dụ: _"Nhiệt độ cao kết hợp độ ẩm thấp sẽ làm hoa lan bị mất nước và cháy lá, cần kích hoạt hệ thống làm mát và tưới bổ sung"_).
+    
+-   **Wisdom (Trí tuệ / Hành động):** Ra quyết định tối ưu tự động (Ví dụ: **Bật hệ thống tưới phun sương và quạt thông gió trong 10 phút** để đưa môi trường về trạng thái lý tưởng).
+### 4. Tính năng hệ thống
+
+-   [x] Tự động đo đạc nhiệt độ và độ ẩm liên tục 24/7
+    
+-   [x] Điều khiển bật/tắt máy bơm từ xa qua giao diện web/mobile
+    
+-   [ ] Cảnh báo sớm qua còi hú và tin nhắn khi thông số vượt ngưỡng an toàn
+    
+-   [x] Lưu trữ lịch sử nhật ký (Log) hệ thống vào bộ nhớ
+### 5. Bảng thông số kỹ thuật thiết bị
+
+|**Tên thiết bị / Cảm biến**|**Thông số kỹ thuật chính**|**Chức năng trong hệ thống**|
+|-|-|-|
+|**Cảm biến DHT22**|Đo nhiệt độ (-40°C đến 80°C) & Độ ẩm (0-100%)|Giám sát môi trường không khí của vườn lan|
+|**Cảm biến đất Capacitive**|Đo điện dung, chống ăn mòn tốt|Theo dõi độ ẩm của giá thể trồng lan|
+|**Máy bơm mini 12V**|Lưu lượng 5L/phút, áp suất vừa phải|Cung cấp nước tưới phun sương|
+### 6. Lưu ý vận hành an toàn
+- **Xử lý sự cố tràn bộ nhớ nhật ký (RAM Full):**
+
+> Nếu RAM bị đầy do dữ liệu nhật ký (log files) ghi quá nhiều, hệ thống có thể bị chậm hoặc đứng hình.
+> 
+> -   **Cách xử lý an toàn:** Dừng tiến trình ghi log hiện tại bằng lệnh `sudo systemctl stop smart-farm-logger`, tiến hành nén hoặc xóa bớt các file log cũ trong thư mục `/var/log/smartfarm/` để giải phóng không gian RAM, sau đó khởi động lại dịch vụ bằng lệnh `sudo systemctl start smart-farm-logger`.
+>
+## Phần 3. Kiểm thử & Xử lý tình huống Mục 
+**6. Lưu ý vận hành an toàn** trong file `README.md` ở trên đã bổ sung đầy đủ phương án xử lý kỹ thuật khi RAM bị đầy nhật ký, giúp người vận hành hoặc kỹ thuật viên tại trang trại xử lý nhanh chóng mà không làm gián đoạn toàn bộ hệ thống tưới tự động.
